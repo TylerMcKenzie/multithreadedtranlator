@@ -13,6 +13,7 @@ class AsyncTranslate extends Thread
 	protected $store;
 	protected $value;
 
+	// Static Thread local
 	protected static $__id = 0;
 	protected static $__run_count = 0;
 	protected static $__thread_id;
@@ -59,7 +60,5 @@ class AsyncTranslate extends Thread
 		} else {
 			echo "Process ({$thread_id}) [" . date("H:i:s") . "]: Value '{$this->value}' provided no translation.\n";
 		}
-
-		sleep(2);
 	}
 }

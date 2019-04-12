@@ -8,8 +8,6 @@
  *
  */
 
-//include "../../vendor/autoload.php";
-
 use \DEP\Phoenix\Translator\Connector\ConnectorApertium;
 
 class ConnectionWorker extends Worker
@@ -29,27 +27,19 @@ class ConnectionWorker extends Worker
 
 	public function getConnector()
 	{
-//		if(!self::$connector) {
-			$connector_params = [
-				"lang_from" => "eng",
-				"lang_to"   => "spa",
-				//"nodes"     => "http://10.209.69.227:2737/translate;http://10.210.130.238:2737/translate",
-				"nodes"     => "http://localhost:2738/translate;http://localhost:2737/translate"
-			];
+		$connector_params = [
+			"lang_from" => "eng",
+			"lang_to"   => "spa",
+			"nodes"     => "http://10.209.69.227:2737/translate;http://10.210.130.238:2737/translate"
+			// "nodes"     => "http://localhost:2738/translate;http://localhost:2737/translate" // Run on Local w/ ssh tunnel
+		];
 
-			self::$connector = new ConnectorApertium();
-			self::$connector->initializeConnector($connector_params);
+		self::$connector = new ConnectorApertium();
+		self::$connector->initializeConnector($connector_params);
 
-			if (self::$connector->errno !== 0) {
-				throw new Exception(self::$connector->error);
-			}
-//		} else {
-//			self::$connector->close();
-//
-//			if (!self::$connector->open()) {
-//				echo "Connector failed to open.\n";
-//			}
-//		}
+		if (self::$connector->errno !== 0) {
+			throw new Exception(self::$connector->error);
+		}
 
 		return self::$connector;
 	}
