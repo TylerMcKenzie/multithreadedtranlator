@@ -4,48 +4,60 @@
  * Date: 4/10/2019
  */
 
-include "../vendor/autoload.php"; // You may need to update this depending on where you install the tool
+include "../../vendor/autoload.php"; // You may need to update this depending on where you install the tool
 include "./src/AsyncTranslate.php";
 include "./src/ConnectionWorker.php";
+include "./src/Cli.php";
 
 new \DEP\Phoenix\Translator\Connector\ConnectorApertium();
 
-$strings_to_translate = [
-					// Military
-					"Army",
-					"Navy",
-					"Marines",
-					"Air Force",
-					"Coast Guard",
-					"Military Veteran",
-					"Active Service",
-					"National Guard",
-					"Active Reserve",
-					"Ready Reserve",
-					"GoldStar",
-					"Honorable Discharge",
-					"Individual Ready Reserve",
-					"Military",
-					"Reserve",
+$cli_config = [
+	"-f|--file"    => "file",
+	"-t|--threads" => "threads"
+];
 
-					// College
-					"College",
-					"Education",
-					"Student",
-					"Vocational School",
-					"Diploma",
-					"Graduate Degree",
-					"University",
-					"Collegiate",
-					"Seminary",
-					"Academics",
-					"Degree",
-					"Accredited",
-					"Two Year Degree",
-					"Graduates",
-					"Registered Nurse",
-					"Medical School",
-				];
+$cli = new Cli($cli_config);
+$arguments = $cli->process($argv);
+
+// Dummy text to translate # Uncomment to use
+//$strings_to_translate = [
+//					// Military
+//					"Army",
+//					"Navy",
+//					"Marines",
+//					"Air Force",
+//					"Coast Guard",
+//					"Military Veteran",
+//					"Active Service",
+//					"National Guard",
+//					"Active Reserve",
+//					"Ready Reserve",
+//					"GoldStar",
+//					"Honorable Discharge",
+//					"Individual Ready Reserve",
+//					"Military",
+//					"Reserve",
+//
+//					// College
+//					"College",
+//					"Education",
+//					"Student",
+//					"Vocational School",
+//					"Diploma",
+//					"Graduate Degree",
+//					"University",
+//					"Collegiate",
+//					"Seminary",
+//					"Academics",
+//					"Degree",
+//					"Accredited",
+//					"Two Year Degree",
+//					"Graduates",
+//					"Registered Nurse",
+//					"Medical School",
+//				];
+
+
 echo "Initializing Pool\n";
 $connector_params = [
 	"lang_from" => "eng",
