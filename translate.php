@@ -5,8 +5,8 @@
  */
 
 include "../../vendor/autoload.php";
-include "./AsyncTranslate.php";
-include "./ConnectionWorker.php";
+include "./src/AsyncTranslate.php";
+include "./src/ConnectionWorker.php";
 
 new \DEP\Phoenix\Translator\Connector\ConnectorApertium();
 //$connector_ap->initializeConnector([
