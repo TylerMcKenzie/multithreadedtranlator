@@ -70,6 +70,5 @@ $pool->shutdown();
 
 $store_file = "store_" . date("mdy_His") . ".json";
 $stores_json = json_encode($stores);
-print_r($stores);
 echo "Saving Translations...\n";
 file_put_contents($store_file, $stores_json);
