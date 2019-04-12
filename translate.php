@@ -4,23 +4,12 @@
  * Date: 4/10/2019
  */
 
-include "../../vendor/autoload.php";
+include "../vendor/autoload.php"; // You may need to update this depending on where you install the tool
 include "./src/AsyncTranslate.php";
 include "./src/ConnectionWorker.php";
 
 new \DEP\Phoenix\Translator\Connector\ConnectorApertium();
-//$connector_ap->initializeConnector([
-//	                                   "lang_from" => "eng",
-//	                                   "lang_to"   => "spa",
-//	                                   //"nodes"     => "http://10.209.69.227:2737/translate;http://10.210.130.238:2737/translate",
-//	                                   "nodes"     => "http://localhost:2737/translate;http://localhost:2737/translate"
-//                                   ]);
-//
-//$connector_ap->open();
-//$translation = $connector_ap->translate("Hello World!");
-//echo $translation;
-//$connector_ap->close();
-//exit;
+
 $strings_to_translate = [
 					// Military
 					"Army",
@@ -64,7 +53,6 @@ $connector_params = [
 	"nodes"     => "http://localhost:2738/translate;http://localhost:2737/translate"
 ];
 
-//$pool = new Pool(count($strings_to_translate), 'ConnectionWorker', [ $connector_params ]);
 $pool = new Pool(4, 'ConnectionWorker', [ $connector_params ]);
 
 $stores = [];
@@ -84,4 +72,4 @@ $store_file = "store_" . date("mdy_His") . ".json";
 $stores_json = json_encode($stores);
 print_r($stores);
 echo "Saving Translations...\n";
-//file_put_contents($store_file, $stores_json);
+file_put_contents($store_file, $stores_json);
